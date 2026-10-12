@@ -3,6 +3,11 @@ Unit & Integration tests for ApexRev Multi-Agent Engine and SQLite Database.
 """
 
 import os
+import sys
+
+# Ensure src is always discoverable regardless of working directory
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src")))
+
 from apexrev.engine import MultiAgentEngine
 from apexrev.state import MissionStatus
 

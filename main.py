@@ -12,10 +12,14 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
 from apexrev.server import start_server
 
+import argparse
+
 def main():
-    port = int(os.environ.get("PORT", 8000))
-    host = os.environ.get("HOST", "127.0.0.1")
-    start_server(host=host, port=port)
+    parser = argparse.ArgumentParser(description="ApexRev Enterprise AI Agent Platform")
+    parser.add_argument("--host", default=os.environ.get("HOST", "0.0.0.0"), help="Host to bind server")
+    parser.add_argument("--port", type=int, default=int(os.environ.get("PORT", 8000)), help="Port to listen on")
+    args = parser.parse_args()
+    start_server(host=args.host, port=args.port)
 
 if __name__ == "__main__":
     main()
