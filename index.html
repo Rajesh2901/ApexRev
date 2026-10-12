@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexRev OS · Autonomous Enterprise Multi-Agent Intelligence</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Sleek custom scrollbars */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: rgba(11, 15, 25, 0.5); }
+    ::-webkit-scrollbar-thumb { background: rgba(79, 70, 229, 0.25); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(99, 102, 241, 0.5); }
+
+    /* Keyframe Animations */
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.7)); }
+      50% { opacity: 0.5; filter: drop-shadow(0 0 3px rgba(99, 102, 241, 0.3)); }
+    }
+    @keyframes pulseSuccess {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.7)); }
+      50% { opacity: 0.5; filter: drop-shadow(0 0 3px rgba(16, 185, 129, 0.3)); }
+    }
+    @keyframes pulseWarning {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.8)); }
+      50% { opacity: 0.5; filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.3)); }
+    }
+    @keyframes flowLine {
+      0% { stroke-dashoffset: 40; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .pulse-indigo { animation: pulseGlow 2.5s infinite; }
+    .pulse-emerald { animation: pulseSuccess 2s infinite; }
+    .pulse-amber { animation: pulseWarning 2s infinite; }
+    .flow-active {
+      stroke-dasharray: 6 6;
+      animation: flowLine 1.2s linear infinite;
+    }
+    .shimmer-btn {
+      background: linear-gradient(90deg, #4f46e5 0%, #818cf8 40%, #c084fc 60%, #4f46e5 100%);
+      background-size: 200% auto;
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* Glass and Glow Utilities */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(51, 65, 85, 0.45);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+    .glass-panel {
+      background: rgba(11, 15, 25, 0.75);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(30, 41, 59, 0.6);
+    }
+    .node-active {
+      background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.25) 0%, rgba(15, 23, 42, 0.9) 80%);
+      border-color: rgba(129, 140, 248, 0.8);
+      box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.35);
+    }
+  </style>
+</head>
+<body class="bg-[#060811] text-slate-100 min-h-screen antialiased selection:bg-indigo-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- Ambient Background Lighting -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px]"></div>
+    <div class="absolute top-1/3 -right-40 w-[550px] h-[550px] bg-purple-600/10 rounded-full blur-[140px]"></div>
+    <div class="absolute -bottom-40 left-1/3 w-[650px] h-[650px] bg-cyan-600/10 rounded-full blur-[140px]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-25"></div>
+  </div>
+
+  <!-- Primary Header & Command Bar -->
+  <header class="glass-panel border-b border-slate-800/80 sticky top-0 z-50 px-5 sm:px-8 py-3.5 transition-all">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 relative z-10">
+      
+      <!-- Brand & Status -->
+      <div class="flex items-center gap-3.5">
+        <div class="relative">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 flex items-center justify-center font-extrabold text-white text-lg shadow-lg shadow-indigo-500/25 pulse-indigo">
+            ▲
+          </div>
+          <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#060811]"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h1 class="text-base font-extrabold tracking-tight text-white flex items-center gap-2">
+              ApexRev <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">Intelligence OS</span>
+            </h1>
+            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+              v2.5 Autonomous
+            </span>
+          </div>
+          <div class="flex items-center gap-2 text-xs text-slate-400 mt-0.5 font-medium">
+            <span>Enterprise Multi-Agent Pipeline</span>
+            <span class="text-slate-600">•</span>
+            <span class="text-emerald-400 font-mono text-[11px] flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-emerald"></span> Core Connected (Port 8000)
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Segment Controller -->
+      <div class="flex items-center bg-slate-950/80 p-1 rounded-xl border border-slate-800/80 shadow-inner">
+        <button onclick="switchMode('ui')" id="btn-mode-ui" class="px-4 py-2 rounded-lg text-xs font-bold transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-md shadow-indigo-600/30">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          <span>Production Mission Control</span>
+        </button>
+        <button onclick="switchMode('arch')" id="btn-mode-arch" class="px-4 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 transition-all duration-300 flex items-center gap-2">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          <span>System Architecture 6-Layer</span>
+        </button>
+      </div>
+
+      <!-- Quick Metrics Pill & Tenant -->
+      <div class="hidden lg:flex items-center gap-4 text-xs">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800">
+          <span class="text-slate-400">Active Tenant:</span>
+          <span class="font-bold text-indigo-300 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-indigo-400"></span> Palantir Cloud (Prod)
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 space-y-7 relative z-10">
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 1: PRODUCTION MISSION CONTROL -->
+    <!-- ========================================================================= -->
+    <div id="view-ui" class="space-y-7">
+      
+      <!-- Top Executive KPI Banners -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <div class="glass-card rounded-2xl p-4.5 relative overflow-hidden group transition duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition"></div>
+          <div class="flex justify-between items-start">
+            <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">Autonomous Pipeline</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-bold border border-emerald-500/20">▲ 41.2% MoM</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-white mt-2 font-mono tracking-tight">$2,410,000</div>
+          <div class="flex items-center justify-between text-xs text-slate-400 mt-1.5">
+            <span>High-intent qualified deals</span>
+            <span class="text-slate-500 font-mono">18 active</span>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-4.5 relative overflow-hidden group transition duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition"></div>
+          <div class="flex justify-between items-start">
+            <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">RFP / Tender Win Rate</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 font-bold border border-cyan-500/20">100% On-Time</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-cyan-300 mt-2 font-mono tracking-tight">81.6%</div>
+          <div class="flex items-center justify-between text-xs text-slate-400 mt-1.5">
+            <span>Avg response: 18 mins (was 14d)</span>
+            <span class="text-slate-500 font-mono">22 bids</span>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-4.5 relative overflow-hidden group transition duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition"></div>
+          <div class="flex justify-between items-start">
+            <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">HITL Sentinel Queue</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 font-bold border border-amber-500/20">Review Active</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-amber-400 mt-2 font-mono tracking-tight" id="kpi-queue">2 Pending</div>
+          <div class="flex items-center justify-between text-xs text-slate-400 mt-1.5">
+            <span>Interrupted at human gate</span>
+            <span class="text-amber-400 font-mono">Action Req</span>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-4.5 relative overflow-hidden group transition duration-300">
+          <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition"></div>
+          <div class="flex justify-between items-start">
+            <span class="text-[11px] uppercase tracking-wider text-slate-400 font-bold">Inference Cost / Mission</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-400 font-bold border border-purple-500/20">96.8% Margin</span>
+          </div>
+          <div class="text-2xl sm:text-3xl font-extrabold text-white mt-2 font-mono tracking-tight">$0.28</div>
+          <div class="flex items-center justify-between text-xs text-slate-400 mt-1.5">
+            <span>Flash router + Sonnet synthesis</span>
+            <span class="text-slate-500 font-mono">3,810 tkns</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Main Interactive Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+        
+        <!-- ==================== LEFT COLUMN: MISSION CONTROLLER & AGENT DAG (7 COLS) ==================== -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- Mission Trigger Panel -->
+          <div class="glass-card rounded-2xl p-5 sm:p-6 shadow-2xl relative overflow-hidden border border-slate-800">
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
+              <div class="flex items-center gap-2.5">
+                <span class="w-3 h-3 rounded-full bg-indigo-500 pulse-indigo"></span>
+                <h2 class="text-sm font-bold text-white uppercase tracking-wider">Mission Dispatch Controller</h2>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-1 text-[11px] font-mono rounded-lg bg-slate-900 border border-slate-800 text-slate-400">
+                  Worker Pool: <strong class="text-emerald-400">Ready (4 Nodes)</strong>
+                </span>
+              </div>
+            </div>
+
+            <!-- Scenario Selection Pills -->
+            <div class="space-y-4 pt-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                  Select Autonomous Mission Scenario:
+                </label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  <button onclick="setScenario('databricks')" id="pill-databricks" class="scenario-pill text-left p-3 rounded-xl border border-indigo-500/80 bg-indigo-600/15 transition duration-200">
+                    <div class="text-[11px] font-bold text-indigo-300 flex items-center justify-between">
+                      <span>B2B Pipeline</span>
+                      <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                    </div>
+                    <div class="text-xs font-bold text-white mt-1">Databricks</div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">VP Infrastructure (Lakehouse)</div>
+                  </button>
+
+                  <button onclick="setScenario('stripe')" id="pill-stripe" class="scenario-pill text-left p-3 rounded-xl border border-slate-800 bg-slate-900/60 hover:border-slate-700 transition duration-200">
+                    <div class="text-[11px] font-bold text-slate-400 flex items-center justify-between">
+                      <span>Fintech Wire</span>
+                      <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                    </div>
+                    <div class="text-xs font-bold text-white mt-1">Stripe Treasury</div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">ISO 20022 Compliance</div>
+                  </button>
+
+                  <button onclick="setScenario('rfp-dod')" id="pill-rfp" class="scenario-pill text-left p-3 rounded-xl border border-slate-800 bg-slate-900/60 hover:border-slate-700 transition duration-200">
+                    <div class="text-[11px] font-bold text-slate-400 flex items-center justify-between">
+                      <span>GovCon Tender</span>
+                      <span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span>
+                    </div>
+                    <div class="text-xs font-bold text-white mt-1">DoD USAF Cloud</div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">86-Page Zero-Trust RFP</div>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Mission Configuration Specs -->
+              <div class="grid grid-cols-3 gap-2.5 text-xs">
+                <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800/80">
+                  <span class="text-slate-500 text-[10px] uppercase font-bold block">Grounding Fabric</span>
+                  <span class="text-indigo-300 font-semibold text-xs flex items-center gap-1.5 mt-0.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span> pgvector + BM25 RRF
+                  </span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800/80">
+                  <span class="text-slate-500 text-[10px] uppercase font-bold block">Safety Sentinel</span>
+                  <span class="text-emerald-300 font-semibold text-xs flex items-center gap-1.5 mt-0.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> NeMo DLP Active
+                  </span>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800/80">
+                  <span class="text-slate-500 text-[10px] uppercase font-bold block">Human Checkpoint</span>
+                  <span class="text-amber-300 font-semibold text-xs flex items-center gap-1.5 mt-0.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Freeze &lt; 95% Conf
+                  </span>
+                </div>
+              </div>
+
+              <!-- Shimmer Dispatch Button -->
+              <div class="pt-1">
+                <button onclick="startMissionExecution()" id="btn-dispatch" class="w-full py-3.5 px-6 rounded-xl font-bold text-xs uppercase tracking-wider text-white shadow-xl shadow-indigo-600/30 shimmer-btn flex items-center justify-center gap-2.5 transform active:scale-[0.99] transition duration-150">
+                  <svg class="w-4 h-4 animate-spin hidden" id="spinner-dispatch" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+                  <span id="label-dispatch">⚡ Trigger Autonomous Multi-Agent Loop</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Multi-Agent DAG State Canvas -->
+          <div class="glass-card rounded-2xl p-5 sm:p-6 shadow-2xl border border-slate-800 space-y-5">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800/80">
+              <div>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-white flex items-center gap-2">
+                  <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  LangGraph Multi-Agent Topology
+                </h3>
+                <p class="text-[11px] text-slate-400 mt-0.5">Real-time DAG node execution with state checkpointing</p>
+              </div>
+              <div class="flex items-center gap-3 text-[11px] font-mono">
+                <span class="flex items-center gap-1.5 text-slate-400"><span class="w-2 h-2 rounded-full bg-slate-700"></span> Idle</span>
+                <span class="flex items-center gap-1.5 text-indigo-400"><span class="w-2 h-2 rounded-full bg-indigo-500 pulse-indigo"></span> Active</span>
+                <span class="flex items-center gap-1.5 text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Passed</span>
+              </div>
+            </div>
+
+            <!-- Connected Nodes with SVG Flow Lines -->
+            <div class="relative py-2">
+              
+              <!-- SVG Connector Background -->
+              <svg class="absolute top-1/2 -translate-y-1/2 left-0 w-full h-8 pointer-events-none z-0 hidden sm:block" preserveAspectRatio="none" viewBox="0 0 500 20">
+                <line x1="50" y1="10" x2="450" y2="10" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+                <line id="svg-flow-active" x1="50" y1="10" x2="50" y2="10" stroke="#818cf8" stroke-width="3" stroke-linecap="round" class="flow-active transition-all duration-500"/>
+              </svg>
+
+              <!-- Node Cards Grid -->
+              <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 relative z-10">
+                
+                <!-- Node 1: Supervisor -->
+                <div id="node-supervisor" class="p-3 rounded-2xl bg-slate-900/90 border border-slate-800 transition-all duration-300 flex flex-col items-center text-center group cursor-pointer hover:border-slate-700">
+                  <div class="w-8 h-8 rounded-xl bg-indigo-950/80 border border-indigo-500/30 text-indigo-400 font-bold flex items-center justify-center mb-1.5 text-xs shadow-inner">
+                    01
+                  </div>
+                  <div class="font-extrabold text-white text-xs">Supervisor</div>
+                  <div class="text-[10px] text-slate-400 font-mono mt-0.5">Task Splitter</div>
+                  <span class="mt-2 text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400" id="badge-n1">READY</span>
+                </div>
+
+                <!-- Node 2: Research -->
+                <div id="node-research" class="p-3 rounded-2xl bg-slate-900/90 border border-slate-800 transition-all duration-300 flex flex-col items-center text-center group cursor-pointer hover:border-slate-700">
+                  <div class="w-8 h-8 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-400 font-bold flex items-center justify-center mb-1.5 text-xs shadow-inner">
+                    02
+                  </div>
+                  <div class="font-extrabold text-white text-xs">Research</div>
+                  <div class="text-[10px] text-slate-400 font-mono mt-0.5">MCP Scraper</div>
+                  <span class="mt-2 text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400" id="badge-n2">IDLE</span>
+                </div>
+
+                <!-- Node 3: Compliance RAG -->
+                <div id="node-compliance" class="p-3 rounded-2xl bg-slate-900/90 border border-slate-800 transition-all duration-300 flex flex-col items-center text-center group cursor-pointer hover:border-slate-700">
+                  <div class="w-8 h-8 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-400 font-bold flex items-center justify-center mb-1.5 text-xs shadow-inner">
+                    03
+                  </div>
+                  <div class="font-extrabold text-white text-xs">Audit RAG</div>
+                  <div class="text-[10px] text-slate-400 font-mono mt-0.5">pgvector Match</div>
+                  <span class="mt-2 text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400" id="badge-n3">IDLE</span>
+                </div>
+
+                <!-- Node 4: Drafting -->
+                <div id="node-draft" class="p-3 rounded-2xl bg-slate-900/90 border border-slate-800 transition-all duration-300 flex flex-col items-center text-center group cursor-pointer hover:border-slate-700">
+                  <div class="w-8 h-8 rounded-xl bg-slate-800/80 border border-slate-700 text-slate-400 font-bold flex items-center justify-center mb-1.5 text-xs shadow-inner">
+                    04
+                  </div>
+                  <div class="font-extrabold text-white text-xs">Synthesizer</div>
+                  <div class="text-[10px] text-slate-400 font-mono mt-0.5">Tone Aligner</div>
+                  <span class="mt-2 text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400" id="badge-n4">IDLE</span>
+                </div>
+
+                <!-- Node 5: HITL Gate -->
+                <div id="node-hitl" class="p-3 rounded-2xl bg-amber-950/20 border border-amber-500/30 transition-all duration-300 flex flex-col items-center text-center group cursor-pointer hover:border-amber-400/60 col-span-2 sm:col-span-1">
+                  <div class="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold flex items-center justify-center mb-1.5 text-xs shadow-inner">
+                    05
+                  </div>
+                  <div class="font-extrabold text-amber-300 text-xs">HITL Gate</div>
+                  <div class="text-[10px] text-amber-400/80 font-mono mt-0.5">Safety Pause</div>
+                  <span class="mt-2 text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300" id="badge-n5">SENTINEL</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terminal Reasoning Stream -->
+            <div class="bg-[#03060d] rounded-2xl border border-slate-800 p-4 font-mono text-xs space-y-2 shadow-2xl relative">
+              <div class="flex items-center justify-between border-b border-slate-800/80 pb-2.5 text-slate-400 text-[11px]">
+                <div class="flex items-center gap-2">
+                  <div class="flex gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                  </div>
+                  <span class="text-slate-300 font-bold ml-2">Reasoning & Tool Execution Stream</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-emerald"></span>
+                  <span id="stream-status" class="text-slate-400">Stream Connected</span>
+                </div>
+              </div>
+              <div id="stream-logs" class="h-44 overflow-y-auto space-y-1.5 text-slate-300 pr-1 text-[11px] leading-relaxed">
+                <div class="text-slate-500">// System ready. Click 'Trigger Autonomous Multi-Agent Loop' to run live reasoning trace.</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==================== RIGHT COLUMN: HITL REVIEW DRAWER (5 COLS) ==================== -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="glass-card rounded-2xl p-5 sm:p-6 shadow-2xl border border-slate-800 space-y-5">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800/80">
+              <div>
+                <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400 pulse-amber"></span>
+                  Human-in-the-Loop Review Queue
+                </h3>
+                <p class="text-[11px] text-slate-400 mt-0.5">Gated checkpoint before external CRM / dispatch</p>
+              </div>
+              <span id="badge-confidence" class="px-2.5 py-1 rounded-full text-[11px] font-mono font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                Confidence: 94.2%
+              </span>
+            </div>
+
+            <!-- Review Card Box -->
+            <div class="border border-slate-800/90 bg-[#0d1424]/90 rounded-2xl p-4.5 space-y-4 shadow-xl">
+              <div class="flex items-center justify-between text-xs pb-2 border-b border-slate-800">
+                <span class="text-slate-400 font-medium">Target Prospect / Entity:</span>
+                <span id="hitl-target-name" class="font-bold text-indigo-300 font-mono">Alex Chen (VP Infrastructure @ Databricks)</span>
+              </div>
+
+              <!-- Signals & Citations Badges -->
+              <div class="space-y-2">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Discovered Signals & Grounded Citations:</span>
+                <div class="flex flex-wrap gap-1.5" id="hitl-chips">
+                  <span class="px-2 py-1 rounded-lg bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-[10px] font-mono">Signal: Multi-region failover RFC</span>
+                  <span class="px-2 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-mono">Verified: SOC2 Type II Doc #42</span>
+                </div>
+              </div>
+
+              <!-- Draft Content Diff Box -->
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <label class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Synthesized Artifact (Editable Draft):</label>
+                  <span class="text-[10px] font-mono text-emerald-400">Zero Hallucinations ✓</span>
+                </div>
+                <div id="hitl-draft-box" class="bg-[#060913] border border-slate-800 rounded-xl p-3.5 text-xs text-slate-200 leading-relaxed font-sans max-h-52 overflow-y-auto whitespace-pre-line shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                  Subject: Alex - mitigating cross-region schema drift across your lakehouse pipelines?
+
+                  Hi Alex,
+
+                  Read your team's engineering blog post on Databricks' recent multi-region metadata partition rollout.
+
+                  When teams scale partitioned Delta tables across 4+ AWS/GCP regions at your velocity, SRE teams typically burn 25%+ of on-call hours managing silent state divergence and metastore retry loops.
+
+                  Our platform guarantees sub-50ms atomic state replication with Zero-Knowledge verification, completely eliminating sync timeouts for Snowflake and Databricks clusters.
+
+                  Would you be open to reviewing a 3-page technical validation spec with benchmark traces this Thursday?
+                </div>
+              </div>
+
+              <!-- Review Controls -->
+              <div class="pt-2 flex items-center justify-between gap-2.5 border-t border-slate-800">
+                <button onclick="rejectAction()" class="px-3.5 py-2.5 rounded-xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-xs font-semibold text-rose-300 transition duration-150">
+                  Reject & Re-plan
+                </button>
+                <div class="flex items-center gap-2">
+                  <button onclick="editAction()" class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition duration-150 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    <span>Edit Draft</span>
+                  </button>
+                  <button onclick="approveAction()" id="btn-approve" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold transition duration-150 shadow-lg shadow-emerald-600/30 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                    <span>Approve & Sign</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Connected Corporate Knowledge Fabric -->
+            <div class="bg-[#0d1424]/90 border border-slate-800 rounded-2xl p-4.5 space-y-3 shadow-xl">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-bold text-slate-300 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                  Grounded Enterprise Documents
+                </span>
+                <span class="text-emerald-400 text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20">Synced</span>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/60 border border-slate-800/80">
+                  <span class="text-slate-300 font-medium truncate max-w-[200px]">Enterprise_Security_Whitepaper_v4.pdf</span>
+                  <span class="text-[10px] text-indigo-300 font-mono bg-indigo-500/10 px-2 py-0.5 rounded">1,420 chunks</span>
+                </div>
+                <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/60 border border-slate-800/80">
+                  <span class="text-slate-300 font-medium truncate max-w-[200px]">Customer_Case_Study_Palantir.pdf</span>
+                  <span class="text-[10px] text-indigo-300 font-mono bg-indigo-500/10 px-2 py-0.5 rounded">680 chunks</span>
+                </div>
+                <div class="flex justify-between items-center p-2 rounded-lg bg-slate-900/60 border border-slate-800/80">
+                  <span class="text-slate-300 font-medium truncate max-w-[200px]">Corporate_Legal_Playbook_2026.docx</span>
+                  <span class="text-[10px] text-indigo-300 font-mono bg-indigo-500/10 px-2 py-0.5 rounded">2,110 chunks</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- VIEW 2: SYSTEM ARCHITECTURE 6-LAYER EXPLORER -->
+    <!-- ========================================================================= -->
+    <div id="view-arch" class="hidden space-y-7">
+      
+      <div class="glass-card rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden border border-slate-800">
+        <div class="max-w-3xl space-y-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <span>Enterprise Hexagonal Event-Driven Architecture</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">System Architecture & Code Blueprint</h2>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            ApexRev isolates stateless reasoning workers from stateful persistence and tool sandboxes. Click any layer below to inspect component responsibilities, data payloads, and copy production code snippets.
+          </p>
+        </div>
+      </div>
+
+      <!-- 6-Layer Cards Matrix -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4.5">
+        
+        <div onclick="selectArchLayer(1)" id="card-layer-1" class="arch-card cursor-pointer glass-card rounded-2xl p-5 transition-all duration-200 border-2 border-indigo-600 shadow-lg shadow-indigo-600/20 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="w-8 h-8 rounded-xl bg-indigo-600 font-bold text-white text-xs flex items-center justify-center shadow-md">L1</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Next.js 15 / SSE</span>
+          </div>
+          <h3 class="text-sm font-bold text-white">1. Client & Presentation Layer</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Real-time React 19 web app with Server-Sent Events (SSE) streaming for token streaming, HITL approval queue, and graph visualization.
+          </p>
+        </div>
+
+        <div onclick="selectArchLayer(2)" id="card-layer-2" class="arch-card cursor-pointer glass-card rounded-2xl p-5 transition-all duration-200 border border-slate-800 hover:border-slate-700 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="w-8 h-8 rounded-xl bg-slate-800 font-bold text-slate-300 text-xs flex items-center justify-center">L2</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">Kong / NeMo</span>
+          </div>
+          <h3 class="text-sm font-bold text-white">2. API Gateway & DLP Perimeter</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Enforces SAML SSO, tenant quotas, prompt-injection firewalls, and cryptographic PII redaction before requests hit LLM workers.
+          </p>
+        </div>
+
+        <div onclick="selectArchLayer(3)" id="card-layer-3" class="arch-card cursor-pointer glass-card rounded-2xl p-5 transition-all duration-200 border border-slate-800 hover:border-slate-700 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="w-8 h-8 rounded-xl bg-slate-800 font-bold text-slate-300 text-xs flex items-center justify-center">L3</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">LangGraph / State</span>
+          </div>
+          <h3 class="text-sm font-bold text-white">3. Agent Orchestration Engine</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Stateful multi-agent DAG with PostgreSQL checkpointers. Supports safe interruption, rollback, and human-in-the-loop gates.
+          </p>
+        </div>
+
+        <div onclick="selectArchLayer(4)" id="card-layer-4" class="arch-card cursor-pointer glass-card rounded-2xl p-5 transition-all duration-200 border border-slate-800 hover:border-slate-700 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="w-8 h-8 rounded-xl bg-slate-800 font-bold text-slate-300 text-xs flex items-center justify-center">L4</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">MCP / Playwright</span>
+          </div>
+          <h3 class="text-sm font-bold text-white">4. Tool Execution & MCP Sandbox</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Model Context Protocol (MCP) microVM containers running headless browsers, document shredders, and authenticated CRM connectors.
+          </p>
+        </div>
+
+        <div onclick="selectArchLayer(5)" id="card-layer-5" class="arch-card cursor-pointer glass-card rounded-2xl p-5 transition-all duration-200 border border-slate-800 hover:border-slate-700 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="w-8 h-8 rounded-xl bg-slate-800 font-bold text-slate-300 text-xs flex items-center justify-center">L5</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">pgvector / S3</span>
+          </div>
+          <h3 class="text-sm font-bold text-white">5. Vector Fabric & Knowledge Base</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Hybrid dense-sparse RAG index (BM25 + text-embedding-3-large) partitioned by tenant ID with append-only audit tables.
+          </p>
+        </div>
+
+        <div onclick="selectArchLayer(6)" id="card-layer-6" class="arch-card cursor-pointer glass-card rounded-2xl p-5 transition-all duration-200 border border-slate-800 hover:border-slate-700 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="w-8 h-8 rounded-xl bg-slate-800 font-bold text-slate-300 text-xs flex items-center justify-center">L6</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">LiteLLM / Router</span>
+          </div>
+          <h3 class="text-sm font-bold text-white">6. Model Gateway & Observability</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Intelligent LLM router balancing cost (Flash) vs. reasoning power (Sonnet), with sub-second failover and OpenTelemetry distributed tracing.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Layer Code & Specification Detail Drawer -->
+      <div class="glass-card rounded-2xl p-6 sm:p-7 shadow-2xl border border-slate-800 space-y-5" id="layer-details">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+          <div>
+            <span class="text-[11px] font-mono text-indigo-400 uppercase tracking-widest font-bold" id="detail-tag">Layer 1 Deep Dive</span>
+            <h3 class="text-lg font-bold text-white mt-0.5" id="detail-title">Client & Presentation Architecture (Next.js 15)</h3>
+          </div>
+          <span class="text-xs px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-300 font-mono" id="detail-sla">Target Latency: &lt; 80ms TTFB</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="space-y-4 text-xs leading-relaxed text-slate-300" id="detail-desc">
+            <!-- Populated via script -->
+          </div>
+
+          <div class="bg-[#03060d] rounded-2xl border border-slate-800 p-4.5 font-mono text-xs overflow-x-auto text-slate-300 space-y-2.5 shadow-2xl">
+            <div class="text-[11px] text-slate-500 pb-2 border-b border-slate-800 flex justify-between">
+              <span id="code-filename">app/api/agent/stream/route.ts</span>
+              <span class="text-indigo-400 font-semibold">Production Ready</span>
+            </div>
+            <pre id="code-content" class="text-[11px] leading-relaxed text-indigo-200">// Loading code...</pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // Tab Mode Controller
+    function switchMode(mode) {
+      if (mode === 'ui') {
+        document.getElementById('view-ui').classList.remove('hidden');
+        document.getElementById('view-arch').classList.add('hidden');
+        document.getElementById('btn-mode-ui').className = 'px-4 py-2 rounded-lg text-xs font-bold transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-md shadow-indigo-600/30';
+        document.getElementById('btn-mode-arch').className = 'px-4 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 transition-all duration-300 flex items-center gap-2';
+      } else {
+        document.getElementById('view-ui').classList.add('hidden');
+        document.getElementById('view-arch').classList.remove('hidden');
+        document.getElementById('btn-mode-arch').className = 'px-4 py-2 rounded-lg text-xs font-bold transition-all duration-300 flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-md shadow-indigo-600/30';
+        document.getElementById('btn-mode-ui').className = 'px-4 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-200 transition-all duration-300 flex items-center gap-2';
+      }
+    }
+
+    // Scenario Presets
+    const scenarios = {
+      databricks: {
+        pillId: 'pill-databricks',
+        target: 'Alex Chen (VP Infrastructure @ Databricks)',
+        chips: ['Signal: Multi-region failover RFC', 'Verified: SOC2 Type II Doc #42', 'Target: Delta Lake Lakehouse'],
+        confidence: '94.2%',
+        draft: `Subject: Alex - mitigating cross-region schema drift across your lakehouse pipelines?
+
+Hi Alex,
+
+Read your team's engineering blog post on Databricks' recent multi-region metadata partition rollout.
+
+When teams scale partitioned Delta tables across 4+ AWS/GCP regions at your velocity, SRE teams typically burn 25%+ of on-call hours managing silent state divergence and metastore retry loops.
+
+Our platform guarantees sub-50ms atomic state replication with Zero-Knowledge verification, completely eliminating sync timeouts for Snowflake and Databricks clusters.
+
+Would you be open to reviewing a 3-page technical validation spec with benchmark traces this Thursday?`,
+        logs: [
+          "[Supervisor] Partitioned mission goal into 3 sub-agent branches: External Signals, pgvector RAG, Tone Calibration.",
+          "[Research Agent] [Tool: MCP WebScraper] Scraping public engineering blog & GitHub commits for Databricks...",
+          "[Research Agent] Detected high-impact trigger: Multi-region metadata partition RFC with active hiring.",
+          "[Audit / RAG Agent] [Tool: Hybrid Search] Executing Reciprocal Rank Fusion on pgvector knowledge fabric...",
+          "[Audit / RAG Agent] Grounded match: Retrieved SOC2 Compliance Doc #42 and Palantir latency benchmarks (cosine: 0.89).",
+          "[Synthesizer Agent] Synthesizing low-friction executive pitch with zero fluff.",
+          "[HITL Gate] Compliance score 94.2% < 95.0% threshold. Freezing state graph for human authorization."
+        ]
+      },
+      stripe: {
+        pillId: 'pill-stripe',
+        target: 'Meghan Vance (Head of Treasury Engineering @ Stripe)',
+        chips: ['Signal: ISO 20022 Mandate in 60 Days', 'Verified: Banking Partner Audit #104', 'Target: FedNow SWIFT Gateway'],
+        confidence: '97.5%',
+        draft: `Subject: Meghan - validating ISO 20022 FedNow message translation across partner banks?
+
+Hi Meghan,
+
+With the upcoming ISO 20022 syntax enforcement across domestic clearing networks, ensuring zero-latency pacs.008 schema validation is likely top of mind.
+
+Our agent framework validates and transforms non-standard SWIFT MT feeds into compliant ISO XML in under 12 milliseconds, with cryptographic audit signatures compliant with SOC1/SOC2.
+
+Could we share a 60-second architecture diagram showing how this eliminates translation retries?`,
+        logs: [
+          "[Supervisor] Initialized mission for Fintech & Payments sector.",
+          "[Research Agent] Detected regulatory driver: Federal Reserve ISO 20022 domestic wire enforcement.",
+          "[Audit / RAG Agent] Retrieved banking partner compliance benchmark DOC-FIN-04.",
+          "[Synthesizer Agent] Drafted high-compliance peer-level pitch adhering to financial messaging standards.",
+          "[HITL Gate] Ready for final human dispatch."
+        ]
+      },
+      'rfp-dod': {
+        pillId: 'pill-rfp',
+        target: 'USAF Contracting Command (RFP-2026-CLOUD)',
+        chips: ['Requirement: FedRAMP High', 'Requirement: TS/SCI Cleared SREs', 'Doc: 86-Page DOD Solicitation'],
+        confidence: '98.1%',
+        draft: `SECTION 4.2.1 COMPLIANCE STATEMENT:
+
+The Contractor affirms full compliance with DoD Cloud Computing Security Requirements Guide (SRG) Impact Level 5 (IL5). All data at rest is protected utilizing FIPS 140-3 validated cryptographic modules.
+
+Active FedRAMP High Authorization Package ID #FR-2024-8839 is on file with DISA. Continuous automated vulnerability scanning is performed via eMASS integration with automated STIG checklists.`,
+        logs: [
+          "[Supervisor] PDF Shredder initialized for 86-page RFP specification.",
+          "[Research Agent] Extracted 42 mandatory compliance clauses from Sections 3 and 4.",
+          "[Audit / RAG Agent] Cross-referenced DISA FedRAMP High authorization IDs in verified knowledge base.",
+          "[Synthesizer Agent] Formatted official DoD response language adhering strictly to Federal Acquisition Regulations (FAR).",
+          "[HITL Gate] High-ticket proposal ready for proposal director sign-off."
+        ]
+      }
+    };
+
+    let currentScenarioKey = 'databricks';
+    let activeMissionId = null;
+
+    function setScenario(key) {
+      currentScenarioKey = key;
+      document.querySelectorAll('.scenario-pill').forEach(pill => {
+        pill.className = 'scenario-pill text-left p-3 rounded-xl border border-slate-800 bg-slate-900/60 hover:border-slate-700 transition duration-200';
+      });
+
+      const activePill = document.getElementById(scenarios[key].pillId);
+      activePill.className = 'scenario-pill text-left p-3 rounded-xl border border-indigo-500/80 bg-indigo-600/15 transition duration-200';
+
+      const data = scenarios[key];
+      document.getElementById('hitl-target-name').innerText = data.target;
+      document.getElementById('hitl-draft-box').innerText = data.draft;
+      document.getElementById('badge-confidence').innerText = "Confidence: " + data.confidence;
+      
+      const chipsContainer = document.getElementById('hitl-chips');
+      chipsContainer.innerHTML = '';
+      data.chips.forEach(chip => {
+        const span = document.createElement('span');
+        span.className = 'px-2 py-1 rounded-lg bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-[10px] font-mono';
+        span.innerText = chip;
+        chipsContainer.appendChild(span);
+      });
+    }
+
+    // Live Execution Routine
+    async function startMissionExecution() {
+      const data = scenarios[currentScenarioKey];
+      const btn = document.getElementById('btn-dispatch');
+      const spinner = document.getElementById('spinner-dispatch');
+      const label = document.getElementById('label-dispatch');
+      const status = document.getElementById('stream-status');
+      const logs = document.getElementById('stream-logs');
+      const flowLine = document.getElementById('svg-flow-active');
+
+      btn.disabled = true;
+      spinner.classList.remove('hidden');
+      label.innerText = 'Agents Traversing DAG...';
+      status.innerText = 'Execution Active';
+      status.className = 'text-indigo-400 font-bold';
+      logs.innerHTML = '';
+
+      // Try live server API
+      try {
+        const res = await fetch('/api/missions/create', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ target_account: data.target, scenario_type: currentScenarioKey })
+        });
+        if (res.ok) {
+          const body = await res.json();
+          activeMissionId = body.mission_id;
+          await fetch(`/api/missions/${activeMissionId}/step`, { method: 'POST' });
+        }
+      } catch (err) {
+        // Smoothly proceed with client visualization
+      }
+
+      const nodeSequence = [
+        { id: 'node-supervisor', badge: 'badge-n1', label: 'ACTIVE', svgPos: 100 },
+        { id: 'node-research', badge: 'badge-n2', label: 'SCRAPING', svgPos: 200 },
+        { id: 'node-compliance', badge: 'badge-n3', label: 'MATCHING', svgPos: 300 },
+        { id: 'node-draft', badge: 'badge-n4', label: 'SYNTHESIS', svgPos: 400 },
+        { id: 'node-hitl', badge: 'badge-n5', label: 'GATED', svgPos: 450 }
+      ];
+
+      // Reset node styles
+      nodeSequence.forEach(n => {
+        const el = document.getElementById(n.id);
+        el.className = 'p-3 rounded-2xl bg-slate-900/90 border border-slate-800 transition-all duration-300 flex flex-col items-center text-center';
+        document.getElementById(n.badge).innerText = 'IDLE';
+        document.getElementById(n.badge).className = 'mt-2 text-[9px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-400';
+      });
+
+      let step = 0;
+      const interval = setInterval(() => {
+        if (step < data.logs.length) {
+          const logDiv = document.createElement('div');
+          logDiv.className = step === data.logs.length - 1 ? 'text-amber-300 font-semibold' : 'text-slate-300';
+          logDiv.innerText = `${new Date().toLocaleTimeString()} ${data.logs[step]}`;
+          logs.appendChild(logDiv);
+          logs.scrollTop = logs.scrollHeight;
+
+          const activeIdx = Math.min(step, nodeSequence.length - 1);
+          const currentN = nodeSequence[activeIdx];
+          const activeEl = document.getElementById(currentN.id);
+          
+          activeEl.className = 'p-3 rounded-2xl node-active transition-all duration-300 flex flex-col items-center text-center';
+          const badgeEl = document.getElementById(currentN.badge);
+          badgeEl.innerText = currentN.label;
+          badgeEl.className = 'mt-2 text-[9px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/40';
+
+          if (flowLine) {
+            flowLine.setAttribute('x2', currentN.svgPos);
+          }
+
+          step++;
+        } else {
+          clearInterval(interval);
+          btn.disabled = false;
+          spinner.classList.add('hidden');
+          label.innerText = '⚡ Trigger Autonomous Multi-Agent Loop';
+          status.innerText = 'Suspended at HITL Gate';
+          status.className = 'text-amber-400 font-bold';
+
+          const hitlNode = document.getElementById('node-hitl');
+          hitlNode.className = 'p-3 rounded-2xl bg-amber-500/20 border-2 border-amber-500 text-amber-300 pulse-amber transition-all duration-300 flex flex-col items-center text-center col-span-2 sm:col-span-1';
+          document.getElementById('badge-n5').innerText = 'FROZEN';
+          document.getElementById('badge-n5').className = 'mt-2 text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-500 text-black font-bold';
+        }
+      }, 650);
+    }
+
+    // HITL Review Handlers
+    async function approveAction() {
+      if (activeMissionId) {
+        try {
+          await fetch(`/api/missions/${activeMissionId}/approve`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ edited_content: document.getElementById('hitl-draft-box').innerText })
+          });
+        } catch (e) {}
+      }
+
+      const btn = document.getElementById('btn-approve');
+      btn.disabled = true;
+      btn.innerHTML = '<span>✓ Dispatched!</span>';
+      btn.className = 'px-5 py-2.5 rounded-xl bg-slate-800 text-slate-400 text-xs font-bold transition duration-150 cursor-not-allowed';
+      document.getElementById('kpi-queue').innerText = '1 Pending';
+      alert('Mission Authorized! The cryptographic signature was verified and dispatched to enterprise CRM/Email pool.');
+    }
+
+    function rejectAction() {
+      alert('Draft Rejected. Supervisor agent alerted to regenerate alternative angle.');
+    }
+
+    function editAction() {
+      const box = document.getElementById('hitl-draft-box');
+      box.contentEditable = true;
+      box.focus();
+      box.className = 'bg-[#0d1424] border-2 border-indigo-500 rounded-xl p-3.5 text-xs text-white leading-relaxed font-sans max-h-52 overflow-y-auto whitespace-pre-line shadow-2xl';
+      alert('Draft editor active. Make your edits and click "Approve & Sign".');
+    }
+
+    // Architecture Layer Data
+    const archLayers = {
+      1: {
+        tag: "Layer 1 Deep Dive",
+        title: "Client & Presentation Architecture (Next.js 15 / React 19)",
+        sla: "Target Latency: < 80ms TTFB",
+        desc: `<p>The presentation layer delivers sub-second interactivity during asynchronous multi-agent executions. It leverages React 19 Server Actions for instantaneous command dispatches and subscribes to Redis-backed Server-Sent Events (SSE) streams.</p>
+        <div class="p-3.5 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2 mt-3">
+          <div class="font-bold text-indigo-300 text-[11px] uppercase tracking-wider">Frontend Design Rules:</div>
+          <div>• <strong>Zero Unbound Spinners</strong>: Real-time DAG nodes visualize exact sub-routine states.</div>
+          <div>• <strong>Side-by-Side Diffing</strong>: Highlighting clause replacements with semantic change badges.</div>
+          <div>• <strong>Role Partitioning</strong>: Solution Architects view full traces; Executives see pipeline metrics.</div>
+        </div>`,
+        file: "app/api/agent/stream/route.ts",
+        code: `export async function POST(req: Request) {
+  const { missionId, tenantId } = await req.json();
+  const encoder = new TextEncoder();
+
+  return new Response(
+    new ReadableStream({
+      async start(controller) {
+        const stream = await orchestrator.executeMission({
+          missionId,
+          tenantId,
+          onNodeTransition: (node) => {
+            controller.enqueue(encoder.encode(\`event: node\\ndata: \${JSON.stringify(node)}\\n\\n\`));
+          },
+          onToken: (token) => {
+            controller.enqueue(encoder.encode(\`event: token\\ndata: \${token}\\n\\n\`));
+          }
+        });
+      }
+    }),
+    { headers: { "Content-Type": "text/event-stream" } }
+  );
+}`
+      },
+      2: {
+        tag: "Layer 2 Deep Dive",
+        title: "API Gateway & Security Perimeter (Kong / NeMo Guardrails)",
+        sla: "Enforcement Overhead: < 15ms",
+        desc: `<p>Guards against prompt injection, data exfiltration, and tenant leakage. Uses NeMo Guardrails to scrub PII and sensitive internal tokens before prompt delivery.</p>
+        <div class="p-3.5 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2 mt-3">
+          <div class="font-bold text-indigo-300 text-[11px] uppercase tracking-wider">Perimeter Highlights:</div>
+          <div>• <strong>Injection Firewall</strong>: Vector similarity checks filter jailbreaks.</div>
+          <div>• <strong>Tenant Scoping</strong>: Injects tenant_id into state from verified SAML/JWT.</div>
+          <div>• <strong>Cryptographic Audit</strong>: SHA256 hashes of every prompt stored in immutable logs.</div>
+        </div>`,
+        file: "gateway/middleware/guardrails.py",
+        code: `from nemoguardrails import LLMRails, RailsConfig
+
+config = RailsConfig.from_path("./guardrails/enterprise_dlp")
+rails = LLMRails(config)
+
+async def sanitize_prompt(prompt: str, tenant_id: str) -> str:
+    check_result = await rails.generate_async(messages=[{"role": "user", "content": prompt}])
+    if check_result.get("action") == "block":
+        raise SecurityException("Prompt rejected: Violates enterprise DLP policy")
+    return check_result["sanitized_content"]`
+      },
+      3: {
+        tag: "Layer 3 Deep Dive",
+        title: "Agent Orchestration Engine (LangGraph / State Checkpointer)",
+        sla: "State Checkpoint: < 25ms (PostgreSQL)",
+        desc: `<p>Stateful DAG workflow executing Supervisor, Research Scraper, Compliance Verifier, and Drafting agents with persistent checkpoints in PostgreSQL.</p>
+        <div class="p-3.5 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2 mt-3">
+          <div class="font-bold text-indigo-300 text-[11px] uppercase tracking-wider">State Machine Capabilities:</div>
+          <div>• <strong>Safe Freeze</strong>: Pauses execution at HITL gates for hours without holding worker memory.</div>
+          <div>• <strong>Branching & Rollback</strong>: Ability to re-route execution if compliance score drops.</div>
+        </div>`,
+        file: "engine/graph/workflow.py",
+        code: `from langgraph.graph import StateGraph, END
+from langgraph.checkpoint.postgres import PostgresSaver
+
+workflow = StateGraph(EnterpriseAgentState)
+
+workflow.add_node("supervisor", supervisor_router)
+workflow.add_node("researcher", research_subagent)
+workflow.add_node("verifier", compliance_rag_agent)
+workflow.add_node("drafter", drafting_agent)
+workflow.add_node("hitl_gate", human_approval_gate)
+
+workflow.add_edge("supervisor", "researcher")
+workflow.add_edge("researcher", "verifier")
+workflow.add_edge("verifier", "drafter")
+workflow.add_edge("drafter", "hitl_gate")
+
+app = workflow.compile(
+    checkpointer=PostgresSaver(pool),
+    interrupt_before=["hitl_gate"]
+)`
+      },
+      4: {
+        tag: "Layer 4 Deep Dive",
+        title: "Tool Execution & MCP Sandbox (Model Context Protocol)",
+        sla: "Container Boot: < 120ms (MicroVM)",
+        desc: `<p>Executes tool calls in isolated gVisor/Docker microVM containers via Anthropic's Model Context Protocol (MCP) to eliminate SSRF risks.</p>
+        <div class="p-3.5 bg-slate-900/80 rounded-xl border border-slate-800 space-y-2 mt-3">
+          <div class="font-bold text-indigo-300 text-[11px] uppercase tracking-wider">Available MCP Tools:</div>
+          <div>• <strong>Playwright Scraper</strong>: Headless web intelligence gathering.</div>
+          <div>• <strong>Doc Shredder</strong>: Multimodal table recognition for 100+ page tenders.</div>
+          <div>• <strong>CRM Connector</strong>: Authenticated sync to Salesforce and HubSpot.</div>
+        </div>`,
+        file: "sandbox/mcp_server.py",
+        code: `from mcp.server.fastmcp import FastMCP
+from playwright.async_api import async_playwright
+
+mcp = FastMCP("ApexEnterpriseTools")
+
+@mcp.tool()
+async def scrape_company_signals(domain: str) -> dict:
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        page = await browser.new_page()
+        await page.goto(f"https://{domain}/careers", timeout=10000)
+        content = await page.content()
+        await browser.close()
+        return parse_tech_stack_signals(content)`
+      },
+      5: {
+        tag: "Layer 5 Deep Dive",
+        title: "Vector Fabric & Knowledge Storage (pgvector + BM25 RRF)",
+        sla: "Retrieval Latency: < 45ms (Top-10 Chunks)",
+        desc: `<p>Combines dense semantic vector distances with sparse BM25 lexical keyword matching using Reciprocal Rank Fusion (RRF) for 100% citation recall.</p>`,
+        file: "storage/vector/hybrid_search.sql",
+        code: `CREATE OR REPLACE FUNCTION match_enterprise_docs(
+  query_embedding vector(3072),
+  query_text text,
+  target_tenant_id uuid,
+  match_count int
+)
+RETURNS TABLE (id uuid, content text, citation text, score float) AS $$
+  WITH vector_search AS (
+    SELECT id, 1 - (embedding <=> query_embedding) AS v_score
+    FROM doc_chunks WHERE tenant_id = target_tenant_id
+    ORDER BY embedding <=> query_embedding LIMIT 20
+  ),
+  keyword_search AS (
+    SELECT id, ts_rank(tsv, plainto_tsquery('english', query_text)) AS k_score
+    FROM doc_chunks WHERE tenant_id = target_tenant_id
+    ORDER BY k_score DESC LIMIT 20
+  )
+  SELECT c.id, c.content, c.citation, (COALESCE(v.v_score, 0) * 0.7 + COALESCE(k.k_score, 0) * 0.3) as score
+  FROM doc_chunks c
+  LEFT JOIN vector_search v ON c.id = v.id
+  LEFT JOIN keyword_search k ON c.id = k.id
+  ORDER BY score DESC LIMIT match_count;
+$$ LANGUAGE sql STABLE;`
+      },
+      6: {
+        tag: "Layer 6 Deep Dive",
+        title: "Model Gateway & Observability (LiteLLM + LangSmith)",
+        sla: "Dynamic Failover: < 350ms",
+        desc: `<p>Routes lightweight tasks to Gemini 2.0 Flash (\$0.075/1M tokens) and reserves Claude 3.5 Sonnet / GPT-4o for deep synthesis, sustaining a 95%+ gross software margin.</p>`,
+        file: "gateway/router/model_balancer.py",
+        code: `import litellm
+
+router = litellm.Router(
+    model_list=[
+        {
+            "model_name": "smart_writer",
+            "litellm_params": {"model": "claude-3-5-sonnet-20241022", "api_key": SONNET_KEY}
+        },
+        {
+            "model_name": "smart_writer_backup",
+            "litellm_params": {"model": "gpt-4o", "api_key": OPENAI_KEY}
+        },
+        {
+            "model_name": "fast_classifier",
+            "litellm_params": {"model": "gemini/gemini-2.0-flash", "api_key": GEMINI_KEY}
+        }
+    ],
+    fallbacks=[{"smart_writer": ["smart_writer_backup"]}],
+    timeout=15.0
+)`
+      }
+    };
+
+    function selectArchLayer(layerNum) {
+      document.querySelectorAll('.arch-card').forEach(c => {
+        c.className = 'arch-card cursor-pointer glass-card rounded-2xl p-5 transition-all duration-200 border border-slate-800 hover:border-slate-700 space-y-3';
+      });
+
+      const activeCard = document.getElementById('card-layer-' + layerNum);
+      activeCard.className = 'arch-card cursor-pointer glass-card rounded-2xl p-5 transition-all duration-200 border-2 border-indigo-600 shadow-lg shadow-indigo-600/20 space-y-3';
+
+      const data = archLayers[layerNum];
+      document.getElementById('detail-tag').innerText = data.tag;
+      document.getElementById('detail-title').innerText = data.title;
+      document.getElementById('detail-sla').innerText = data.sla;
+      document.getElementById('detail-desc').innerHTML = data.desc;
+      document.getElementById('code-filename').innerText = data.file;
+      document.getElementById('code-content').innerText = data.code;
+    }
+
+    // Initialize
+    selectArchLayer(1);
+    setScenario('databricks');
+  </script>
+</body>
+</html>
